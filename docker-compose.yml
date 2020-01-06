@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build: ./docker-utils/php-fpm-apache/php7.2/
+    ports:
+      - "8099:80"
+    volumes:
+      - ./docroot:/var/www/html/
+      - ./docker-utils/php-fpm-apache/php7.2/docker-utils/apache2/app.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker-utils/php-fpm-apache/php7.2/docker-utils/apache2/app.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      - db
+    container_name: web_web
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./docker-utils/mysql:/var/lib/mysql
+      - ./docker-utils/app:/app
+    environment:
+      MYSQL_ROOT_PASSWORD: drupal_root
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+    container_name: web_db
