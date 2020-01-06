@@ -4,6 +4,7 @@
 1. clone the repo
 
 ```
+git clone git@github.com:rsarkar29/Docker-Compose.git
 ```
 2. Place your mysqldump to ./docker-utlis/app/ directory.
 3. From root Run below command
